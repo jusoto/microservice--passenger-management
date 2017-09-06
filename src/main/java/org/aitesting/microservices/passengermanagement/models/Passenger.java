@@ -4,8 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +17,13 @@ public class Passenger {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="idpassenger")
 	private Integer idpassenger;
-	private Integer idcity;
+    @ManyToOne
+    @JoinColumn(name = "idcity")
+	private City city;
 	private String fname;
 	private String lname;
 	private String username;
+	private String password;
 	private String email;
 	private Double lastLocationLat;
 	private Double lastLocationLon;
@@ -31,21 +35,6 @@ public class Passenger {
 		
 	}
 
-	public Passenger(Integer idcity, String fname, String lname, String username, String email,
-			Double lastLocationLat, Double lastLocationLon, String address, String phone, Integer active) {
-		super();
-		this.idcity = idcity;
-		this.fname = fname;
-		this.lname = lname;
-		this.username = username;
-		this.email = email;
-		this.lastLocationLat = lastLocationLat;
-		this.lastLocationLon = lastLocationLon;
-		this.address = address;
-		this.phone = phone;
-		this.active = active;
-	}
-
 	public Integer getIdpassenger() {
 		return idpassenger;
 	}
@@ -54,12 +43,12 @@ public class Passenger {
 		this.idpassenger = idpassenger;
 	}
 
-	public Integer getIdcity() {
-		return idcity;
+	public City getCity() {
+		return city;
 	}
 
-	public void setIdcity(Integer idcity) {
-		this.idcity = idcity;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	public String getFname() {
@@ -84,6 +73,14 @@ public class Passenger {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -133,7 +130,10 @@ public class Passenger {
 	public void setActive(Integer active) {
 		this.active = active;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return fname + " " + lname;
+	}
 
 }

@@ -43,7 +43,7 @@ public class PassengerController {
         passenger.setFname(updatedPassenger.getFname() != null ? updatedPassenger.getFname() : passenger.getFname());
         passenger.setLname(updatedPassenger.getLname() != null ? updatedPassenger.getLname()  : passenger.getLname());
         passenger.setUsername(updatedPassenger.getUsername() != null ? updatedPassenger.getUsername() : passenger.getUsername());
-        passenger.setIdcity(updatedPassenger.getIdcity() != null ? updatedPassenger.getIdcity() : passenger.getIdcity());
+        passenger.setCity(updatedPassenger.getCity() != null ? updatedPassenger.getCity() : passenger.getCity());
         passenger.setEmail(updatedPassenger.getEmail() != null ? updatedPassenger.getEmail() : passenger.getEmail());
         passenger.setPhone(updatedPassenger.getPhone() != null ? updatedPassenger.getPhone() : passenger.getPhone());
         passenger.setAddress(updatedPassenger.getAddress() != null ? updatedPassenger.getAddress() : passenger.getAddress());
