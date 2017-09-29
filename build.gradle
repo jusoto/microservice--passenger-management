@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 buildscript {
 	ext {
 		springBootVersion = '1.5.6.RELEASE'
@@ -7,15 +9,34 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.0'
 	}
+}
+
+plugins {
+    id 'com.github.sherter.google-java-format' version '0.6'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+group = 'com.google.maps'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+googleJavaFormat {
+  source = sourceSets*.allJava
+  source 'src/special_dir'
+  exclude '**/*.java'
+  exclude '**/*Template.java'
+  exclude 'src/test/template_*'
+}
 
 repositories {
 	mavenCentral()
@@ -32,15 +53,28 @@ ext {
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	
-	// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-amqp'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    compile 'org.springframework.boot:spring-boot-starter-logging'
 
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
     
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    // Google Maps API
+    // https://mvnrepository.com/artifact/com.google.maps/google-maps-services
+    compile 'com.google.maps:google-maps-services:0.2.3'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'joda-time:joda-time:2.9.9'
+    compileOnly 'com.google.appengine:appengine-api-1.0-sdk:1.9.54'
+    compile 'com.google.guava:guava:23.0-android' // Note, v23.0-android is the last JDK7 supporting release of Guava
+                                                  // but still don't use google-maps-services-java on android
+    compile 'org.json:json:20090211'
+    compile 'com.fasterxml.jackson.core:jackson-databind'
+    
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 dependencyManagement {
