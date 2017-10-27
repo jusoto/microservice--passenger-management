@@ -36,18 +36,18 @@ public class PassengerController {
         return  repository.findByActive(1);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public @ResponseBody Passenger getPassenger(@PathVariable("id") Integer id){
         return repository.findByIdpassenger(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public @ResponseBody Passenger addPassenger(@RequestBody Passenger passenger){
         repository.save(passenger);
         return passenger;
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("update/{id}")
     public @ResponseBody Passenger updatePassenger(@PathVariable("id") Integer id, @RequestBody Passenger updatedPassenger){
         Passenger passenger = repository.findByIdpassenger(id);
         passenger.setFname(updatedPassenger.getFname() != null ? updatedPassenger.getFname() : passenger.getFname());
@@ -64,7 +64,7 @@ public class PassengerController {
         return passenger;
     }
     
-    @PutMapping("/update/location/{id}")
+    @PutMapping("update/location/{id}")
     public @ResponseBody Passenger updatePassengerLocation(@PathVariable("id") Integer id, @RequestParam Double lat, @RequestParam Double lon){
         Passenger passenger = repository.findByIdpassenger(id);
         passenger.setLastLocationLat(lat != null ? lat : passenger.getLastLocationLat());
@@ -74,7 +74,7 @@ public class PassengerController {
         return passenger;
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("delete/{id}")
     public @ResponseBody void deletePassenger(@PathVariable("id") String id){
         repository.delete(id);
     }
@@ -86,14 +86,14 @@ public class PassengerController {
      * @param password
      * @return Passenger
      */
-    @GetMapping("/login")
+    @GetMapping("login")
     public @ResponseBody Passenger getRequestTrip(@RequestParam String username, @RequestParam String password){
     	Passenger passenger = repository.findByUsername(username);
     	//System.out.println("*********************** " + passenger + " ****************************");
     	return passenger;      
     }
     
-    @GetMapping("/requesttrip")
+    @GetMapping("requesttrip")
     public @ResponseBody String getRequestTrip(@RequestParam String idpassenger, @RequestParam Double lat, @RequestParam Double lon, @RequestParam String destinationAddress){
     	CustomMessageTrip customMessage = new CustomMessageTrip();
     	

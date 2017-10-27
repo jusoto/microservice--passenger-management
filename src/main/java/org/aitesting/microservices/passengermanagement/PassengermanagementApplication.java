@@ -20,7 +20,8 @@ import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 
 @SpringBootApplication
-public class PassengerManagementApplication implements RabbitListenerConfigurer {
+//@EnableRedisHttpSession
+public class PassengerManagementApplication /*extends WebSecurityConfigurerAdapter*/ implements RabbitListenerConfigurer {
 
 	public static final String EXCHANGE_NAME = "appExchange";
 	public static final String QUEUE_GENERIC_NAME = "genericQueue";
@@ -122,4 +123,10 @@ public class PassengerManagementApplication implements RabbitListenerConfigurer 
 	public static void main(String[] args) {
 		SpringApplication.run(PassengerManagementApplication.class, args);
 	}
+
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//	    http.httpBasic().disable();
+//	    http.authorizeRequests().anyRequest().authenticated();
+//	}
 }
