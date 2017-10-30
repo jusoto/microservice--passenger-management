@@ -1,10 +1,6 @@
 package org.aitesting.microservices.passengermanagement;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PassengermanagementApplicationTests {
+public class PassengerManagementApplicationTests {
 
 	 @Autowired
 	 private MockMvc mockMvc;
@@ -25,7 +26,7 @@ public class PassengermanagementApplicationTests {
 	public void contextLoads() {
 	}
 	
-	@Test
+	@Ignore
 	public void createNewPassenger_S001() throws Exception {
 		this.mockMvc.perform(get("/api/passengers/login").param("username", "daenerys").param("password", "daenerys"))
         .andDo(print()).andExpect(status().isOk())
