@@ -1,4 +1,6 @@
 # Passenger Management Micro Service
+![alt text](https://travis-ci.org/AITestingOrg/passengermanagement.svg?branch=master "Build Status")
+
 
 This Micro Service takes care of the information of the passengers.
 
